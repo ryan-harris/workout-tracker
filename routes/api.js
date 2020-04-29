@@ -21,7 +21,8 @@ router.put("/api/workouts/:id", (req, res) => {
       $push: { exercises: req.body }
     },
     {
-      runValidators: true
+      runValidators: true,
+      new: true
     }
   )
     .then((data) => {
