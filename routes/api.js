@@ -14,7 +14,13 @@ router.put("/api/workouts/:id", (req, res) => {
 
 // Respond with json for all the workouts in an array.
 router.get("/api/workouts", (req, res) => {
-  // CODE HERE
+  db.Workout.find({})
+    .then((workouts) => {
+      res.json(workouts);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
 });
 
 // Respond with json array containing the last 7 workouts
