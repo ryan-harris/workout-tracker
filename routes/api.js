@@ -8,21 +8,27 @@ router.post("/api/workouts", (req, res) => {
       res.json(data);
     })
     .catch((err) => {
-      res.json(err);
+      res.status(500).json(err);
     });
 });
 
 // Respond with workout for id url parameter. This should
 // respond with the updated workout json
 router.put("/api/workouts/:id", (req, res) => {
-  db.Workout.findByIdAndUpdate(req.params.id, {
-    $push: { exercises: req.body }
-  })
+  db.Workout.findByIdAndUpdate(
+    req.params.id,
+    {
+      $push: { exercises: req.body }
+    },
+    {
+      runValidators: true
+    }
+  )
     .then((data) => {
       res.json(data);
     })
     .catch((err) => {
-      res.json(err);
+      res.status(500).json(err);
     });
 });
 
@@ -34,7 +40,7 @@ router.get("/api/workouts", (req, res) => {
       res.json(data);
     })
     .catch((err) => {
-      res.json(err);
+      res.status(500).json(err);
     });
 });
 
@@ -47,7 +53,7 @@ router.get("/api/workouts/range", (req, res) => {
       res.json(data);
     })
     .catch((err) => {
-      res.json(err);
+      res.status(500).json(err);
     });
 });
 
@@ -58,7 +64,7 @@ router.delete("/api/workouts", (req, res) => {
       res.json(data);
     })
     .catch((err) => {
-      res.json(err);
+      res.status(500).json(err);
     });
 });
 
