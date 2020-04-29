@@ -3,13 +3,27 @@ const db = require("../models");
 
 // Creates a workout using data in the request body.
 router.post("/api/workouts", (req, res) => {
-  // CODE HERE
+  db.Workout.create(req.body)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
 });
 
 // Respond with workout for id url parameter. This should
 // respond with the updated workout json
 router.put("/api/workouts/:id", (req, res) => {
-  // CODE HERE
+  db.Workout.findByIdAndUpdate(req.params.id, {
+    $push: req.body
+  })
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      res.json(err);
+    });
 });
 
 // Respond with json for all the workouts in an array.
